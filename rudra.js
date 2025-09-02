@@ -144,10 +144,10 @@ function onBot({ models: botModel }) {
         global.config.version = '1.2.14'
         global.client.timeStart = new Date().getTime(),
             function () {
-                const listCommand = readdirSync(global.client.mainPath + '/Rudra/commands').filter(command => command.endsWith('.js') && !command.includes('example') && !global.config.commandDisabled.includes(command));
+                const listCommand = readdirSync(global.client.mainPath + '/Henryx/commands').filter(command => command.endsWith('.js') && !command.includes('example') && !global.config.commandDisabled.includes(command));
                 for (const command of listCommand) {
                     try {
-                        var module = require(global.client.mainPath + '/Rudra/commands/' + command);
+                        var module = require(global.client.mainPath + '/Henryx/commands/' + command);
                         if (!module.config || !module.run || !module.config.commandCategory) throw new Error(global.getText('priyansh', 'errorFormat'));
                         if (global.client.commands.has(module.config.name || '')) throw new Error(global.getText('priyansh', 'nameExist'));
                         if (!module.languages || typeof module.languages != 'object' || Object.keys(module.languages).length == 0) logger.loader(global.getText('priyansh', 'notFoundLanguage', module.config.name), 'warn');
