@@ -1,8 +1,8 @@
 {
-"name": "Rudra",
+"name": "Henry",
 "version": "10.1.1",
 "description": "A powerful Facebook Messenger Bot made by Rudra Jaat.",
-"main": "rudra.js",
+"main": "henry.js",
 "engines": {
 "node": "20.x",
 "npm": "10.0.0"
