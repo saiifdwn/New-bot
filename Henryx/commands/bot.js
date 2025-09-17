@@ -3,10 +3,10 @@ const axios = require("axios");
 
 module.exports.config = {
   name: "goibot",
-  version: "4.3.0",
+  version: "5.1.0",
   hasPermssion: 0,
-  credits: "⚡ Luffy ⚡",
-  description: "Trigger Based Funny + Flirty Bot",
+  credits: "⚡ Luffy ⚡ + Modified by GPT",
+  description: "Super Funny Bot (30+ Random Replies)",
   commandCategory: "Noprefix",
   usages: "noprefix",
   cooldowns: 2,
@@ -17,61 +17,49 @@ module.exports.handleEvent = async function ({ api, event, Users }) {
   if (!body) return;
 
   const name = await Users.getNameUser(senderID);
-  const userInfo = await Users.getData(senderID);
-  const gender = userInfo.gender || "MALE";
   const text = body.toLowerCase();
 
-  // ------------------- NORMAL FUNNY REPLIES -------------------
-  const randomReplies = [
-    `😂 ${name}, Chal Thodi Masti Ho Jaye!`,
-    `🔥 ${name}, Aaj Mood Mast Hai!`,
-    `😏 ${name}, Tu Fir Se Aa Gya?`,
-    `🤣 ${name}, Ab To Friend Ban Gaye Hum!`,
-    `👑 ${name}, King Ki Entry Ho Gayi!`,
-    `😈 ${name}, Dikkat Kya Hai Bata!`,
-    `🥵 ${name}, Thoda Shaant Ho Ja Bhai!`,
-    `⚡ ${name}, Mujhe Bulaya? Ab Maja Aayega!`
+  // --- Trigger Condition ---
+  if (!text.includes("bot")) return;
+
+  // ------------------- 30+ SUPER FUNNY REPLIES -------------------
+  const funnyReplies = [
+    `😂 ${name}, Janab Kya Aap BerozGar Ho Jo Dinbhar Bot Ki Mala Jubte Rehte ho?`,
+    `🔥 ${name}, Mujhe Bula Ke Galti Krdi Tune Ab Tu Bolega Me Jada Nolta Hu`,
+    `🤣 ${name}, Abe Bot Hu Koi Gadhe Ki Gan** Nai Jo Humsha Bak Bak Kru?`,
+    `😏 ${name}, Ab Tujh Jaise Low Standed Log Mujhe Boring abol rhe ?`,
+    `👑 ${name}, Tu Rehne de Bhai Warna Kisi Din Teri Bezzati Kr Duga Me`,
+    `😈 ${name}, Har Bar Tujhe Roast Kr Deta Hu Fir Bhi Bot Bot Krta Rehta`,
+    `🥵 ${name}, Sawch Me Ywr Ap Bade Sexy Ho!`,
+    `⚡ ${name}, Bot Ready Hai Apki Bezzati Krne Ke Liye!`,
+    `🤖 ${name}, Kya Baat Hai Bhai Bulaya Bulaya Kyu!`,
+    `😂 ${name}, Tu To Kahil Hai Yr Aj Tune Majduri Krke Bot Kaise Likh Diya!`,
+    `🤣 ${name}, Fir Se Roast Shuru Karu?`,
+    `😆 ${name}, Gu Insan Hai Ya Gadhe Ko Gan*** Hai Jub Dekho Tub Bak Bak Krta Hai?`,
+    `😜 ${name}, Bot Aaya Hai Thodi Idhar Udhar Ki Sunane!`,
+    `😆 ${name}, GC Ka Masti Machine Hu Main!`,
+    `🤣 ${name}, Bot = Entertainment Ki Dukan!`,
+    `😏 ${name}, Ab Kya Karu? Chhedu Kise?`,
+    `🤭 ${name}, Bula Liya To Ab Full Mazak Masti!`,
+    `😂 ${name}, Chal GC Mein Masala Dalte Hai!`,
+    `😈 ${name}, Road Mode: Ab Roast Kruga Subko 🔥`,
+    `🤣 ${name}, Tum Log Bot Ko Bulake Phas Gaye 😆`,
+    `😏 ${name}, Ab To Sabko Roast Karunga 😜`,
+    `😂 ${name}, Bot Ka Swag Dekh Bhai!`,
+    `🔥 ${name}, GC Mein Fire Lagane Aaya Hu!`,
+    `🤣 ${name}, Ab To Hansi Ka Tsunami Aayega!`,
+    `😎 ${name}, Bot Online = Masti Online`,
+    `😂 ${name}, Chal Thoda Bakchodi Ho Jaye!`,
+    `😈 ${name}, GC Ke Sab Members Ready Ho Jao!`,
+    `🤖 ${name}, Aaj Mai Mood Mein Hu Full Maja Milega!`,
+    `🤣 ${name}, Bot Aaya Hai Memes Ke Sath!`,
+    `😏 ${name}, Bhai Tu Bolta Re Main Reply Karta Rahunga!`,
+    `😂 ${name}, Ye Bot Hai Jo Hamesha ON Hai!`,
+    `🔥 ${name}, Tujhe Pata Hai India Me Sirf Do Hi Chiz Famous Hai 1st Modi Ji Ki Backchodi Dusri Meri!`
   ];
 
-  // ------------------- BOT SPECIFIC REPLIES -------------------
-  const botReplies = [
-    `🤖 ${name}, Bot Hoon Main... But Dil Se Dost 😎`,
-    `😂 ${name}, Bot Ko Bula Liya... Ab Masti Dekho!`,
-    `🔥 ${name}, Hacker Mode Activated 💻`,
-    `😈 ${name}, Ab Main Full Power Me Hoon!`,
-    `😜 ${name}, Bot Bhi Thoda Attitude Wala Hai 😉`,
-    `🤣 ${name}, Bot Bulane Ka Charge Lagega Ab!`,
-    `👾 ${name}, Welcome To Dark Side Of Bot 🔥`,
-    `🤭 ${name}, Bot + You = Full Comedy Show!`,
-    `🧠 ${name}, Main Sirf Bot Nahi... Smart Bot Hoon 😏`,
-    `⚡ ${name}, Arey Bhai... Bot Aagya Hai Maja Lo!`
-  ];
-
-  // ------------------- FLIRTY REPLIES (ONLY FOR FEMALE USERS) -------------------
-  const flirtyReplies = [
-    `😉 ${name}, Tumhari Smile To Dil Chura Legi 😍`,
-    `🔥 ${name}, Tum Online Ho To Mood Hi Change Ho Jata Hai 😏`,
-    `😘 ${name}, Itni Cute Kyun Ho Yaar?`,
-    `🥵 ${name}, Aaj To Dangerous Lag Rahi Ho 🔥`,
-    `💘 ${name}, Tumhari DP Dekh Ke Dil Garden-Garden Ho Gaya 🌸`,
-    `😜 ${name}, Tumse Milne Ka Fine Lagta Hai Mujhe 😅`,
-    `💋 ${name}, Ek Baar Smile Kar Do Pure GC Me Light Aa Jayegi 😍`,
-    `🤭 ${name}, Tum Online Ho Bas Din Ban Gaya!`
-  ];
-
-  let reply;
-
-  // --- CONDITION CHECK ---
-  if (text.includes("bot")) {
-    // Agar female hai to flirty reply do
-    if (gender.toUpperCase() === "FEMALE") {
-      reply = flirtyReplies[Math.floor(Math.random() * flirtyReplies.length)];
-    } else {
-      reply = botReplies[Math.floor(Math.random() * botReplies.length)];
-    }
-  } else {
-    return; // koi "bot" nahi bola -> kuch reply mat karo
-  }
+  // Random reply
+  const reply = funnyReplies[Math.floor(Math.random() * funnyReplies.length)];
 
   // --- Typing Animation ---
   api.sendTypingIndicator(threadID, true);
@@ -79,7 +67,7 @@ module.exports.handleEvent = async function ({ api, event, Users }) {
     api.sendMessage(reply, threadID, messageID);
   }, 700);
 
-  // --- Sticker/GIF Chance ---
+  // --- Random Sticker/GIF (20% chance) ---
   if (Math.random() < 0.2) {
     try {
       const imgURL = "https://i.ibb.co/3C9t1fr/funny-sticker.png";
