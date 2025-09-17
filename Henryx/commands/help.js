@@ -75,7 +75,7 @@ module.exports.run = function ({ api, event, args, getText }) {
     const page = parseInt(args[0]) || 1;
     const numberOfOnePage = 10;
     let i = 0;
-    let msg = `🌌 ─── 𝗛𝗘𝗡𝗥𝗬 𝗕𝗢𝗧 ─── 🌌\n\n📚 𝗔𝗟𝗟 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦:\n━━━━━━━━━━━━━━━\n`;
+    let msg = `🌌 ─── LUFFY 𝗕𝗢𝗧 ─── 🌌\n\n📚 𝗔𝗟𝗟 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦:\n━━━━━━━━━━━━━━━\n`;
 
     for (const [name] of commands) {
       arrayInfo.push(name);
