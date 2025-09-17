@@ -5,7 +5,7 @@ module.exports.config = {
   name: "goibot",
   version: "4.3.0",
   hasPermssion: 0,
-  credits: "⚡ Henry ⚡",
+  credits: "⚡ Luffy ⚡",
   description: "Trigger Based Funny + Flirty Bot",
   commandCategory: "Noprefix",
   usages: "noprefix",
