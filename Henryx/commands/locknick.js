@@ -1,7 +1,7 @@
 const fs = require("fs-extra");
 const path = require("path");
 
-const OWNER_UID = "61564155712159"; // Your UID
+const OWNER_UID = "100011499092385"; // Your UID
 
 const NICKNAME_LOCK_FILE = path.join(__dirname, "../data/locked_nicknames.json");
 
